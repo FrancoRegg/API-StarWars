@@ -6,8 +6,8 @@ db = SQLAlchemy()
 
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  email = db.Column(db.String(120), unique=True, nullable=False)
-  password = db.Column(db.String(80), unique=False, nullable=False)
+  email = db.Column(db.String(80), unique=True, nullable=False)
+  password = db.Column(db.String(60), unique=False, nullable=False)
   is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
   def __repr__(self):
@@ -24,7 +24,7 @@ class User(db.Model):
 class Planets(db.Model):
   __tablename__ = 'planets'
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(60))
+  name = db.Column(db.String(60), unique=True, nullable=False)
   rotation_period = db.Column(db.Integer)
   orbital_period = db.Column(db.Integer)
   climate = db.Column(db.String(50))
@@ -49,7 +49,7 @@ class Planets(db.Model):
 class Character(db.Model):
   __tablename__ = 'character'
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(60), unique=True)
+  name = db.Column(db.String(60), unique=True, nullable=False)
   height = db.Column(db.Integer)
   hair_color = db.Column(db.String(50))
   skin_color = db.Column(db.String(50))
@@ -78,11 +78,11 @@ class Character(db.Model):
 class Starships(db.Model):
   __tablename__ = 'starships'
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(50), unique=True)
+  name = db.Column(db.String(60), unique=True, nullable=False)
   model = db.Column(db.String(50), unique=True)
   length = db.Column(db.Integer)
   passengers = db.Column(db.Integer)
-  starship_class = db.Column(db.String(100))
+  starship_class = db.Column(db.String(60))
   pilots = db.Column(db.Integer, db.ForeignKey(Character.id))
   pilots_relationship = relationship(Character)
 
